@@ -25,7 +25,9 @@ function sendTasks() {
   email = email.substring(13);
 
   // do not remove the matched text from the document
-  for (var i = 0; i < tasks.length; i++) {
-    GmailApp.sendEmail(email, tasks[i], "added from google docs");
-  }
+  // for (var i = 0; i < tasks.length; i++) {
+  //   GmailApp.sendEmail(email, tasks[i], "added from google docs");
+  // }
+  var ui = DocumentApp.getUi();
+  ui.alert('Tasks sent to ' + email);
 }
