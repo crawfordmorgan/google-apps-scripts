@@ -1,0 +1,31 @@
+function onOpen() {
+  var ui = DocumentApp.getUi();
+  ui.createAddonMenu()
+    .addItem('Send Tasks', 'sendTasks')
+    .addToUi();
+}
+
+function sendTasks() {
+  var doc = DocumentApp.getActiveDocument();
+  var body = doc.getBody();
+  var text = body.getText();
+  var horizontalLineIndex = text.indexOf("****");
+  if(horizontalLineIndex !== -1){
+    text = text.substring(0,horizontalLineIndex);
+  }
+  var tasks = text.match(/TASK: (.*)/g); // match all instances of "TASK: " followed by any characters
+  var email = text.match(/Asana email: (.*)/)[0]; // match the first instance of "Asana email: " followed by any characters
+  
+  // remove the "TASK: " prefix from the tasks
+  for (var i = 0; i < tasks.length; i++) {
+    tasks[i] = tasks[i].substring(6);
+  }
+
+  // remove the "Asana email: " prefix from the email
+  email = email.substring(13);
+
+  // do not remove the matched text from the document
+  for (var i = 0; i < tasks.length; i++) {
+    GmailApp.sendEmail(email, tasks[i], "added from google docs");
+  }
+}
