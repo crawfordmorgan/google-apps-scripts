@@ -1,10 +1,3 @@
-function onOpen() {
-  var ui = DocumentApp.getUi();
-  ui.createAddonMenu()
-    .addItem('Send Tasks', 'sendTasks')
-    .addToUi();
-}
-
 function findHorizontalRule() {
   var doc = DocumentApp.getActiveDocument();
   var body = doc.getBody();
