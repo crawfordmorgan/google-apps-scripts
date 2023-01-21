@@ -49,12 +49,12 @@ if (emailRegex.test(emailMatch[1])) {
   for (var i = 0; i < tasks.length; i++) {
     tasks[i] = tasks[i].substring(6);
   }
-/*
+
   // do not remove the matched text from the document
    for (var i = 0; i < tasks.length; i++) {
      GmailApp.sendEmail(email, tasks[i], "added from google docs");
    }
-  */
+
   var taskList = "Task Review:\n\n";
   for (var i = 0; i < tasks.length; i++) {
     taskList += tasks[i] + "\n";
